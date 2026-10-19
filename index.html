@@ -1,30 +1,808 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elebyary</title><style>
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: black;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أتيليه Ronza Dress | للفخامة والأناقة عنوان</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;800&family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-light: #fbe69b;
+            --gold-primary: #d4af37;
+            --gold-dark: #997415;
+            --crimson: #8b001d;
+            --ruby-red: #d90429;
+            --rose-pink: #ff758f;
+            --soft-pink: #ffb3c1;
+            --bg-dark: #0a0406;
+            --bg-card: rgba(22, 8, 13, 0.78);
+        }
 
-.container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.container img {
-    height: 80%;   /* هنا الحواف */
-    width: auto;
-    display: block;
-}
-</style></head>
-<body><div class="container">
-    <img src="property.jpg">
-</div></body>
+        body {
+            background: radial-gradient(circle at 50% 25%, #2b0812 0%, #120307 55%, #070103 100%);
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* خلفية ورق الورد المتطاير (Canvas) */
+        #petals-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* إضاءة خلفية ناعمة */
+        .ambient-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(110px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glow-right {
+            width: 420px;
+            height: 420px;
+            background: rgba(217, 4, 41, 0.22);
+            top: 15%;
+            right: -100px;
+        }
+        .glow-left {
+            width: 420px;
+            height: 420px;
+            background: rgba(255, 117, 143, 0.18);
+            top: 15%;
+            left: -100px;
+        }
+        .glow-center {
+            width: 550px;
+            height: 350px;
+            background: rgba(212, 175, 55, 0.12);
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* شريط علوي أنيق مستوحى من واجهة الأتيليه */
+        header {
+            position: relative;
+            z-index: 10;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(10, 2, 5, 0.95) 0%, rgba(10, 2, 5, 0.4) 100%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-brand span.arabic-sub {
+            font-family: 'Amiri', serif;
+            color: var(--gold-light);
+            font-size: 1.25rem;
+        }
+
+        .nav-brand span.english-name {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.6rem;
+            background: linear-gradient(to right, #fbe69b, #d4af37, #fff3c4, #b5891c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #f8e8ee;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold-light);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+        }
+
+        /* القسم الرئيسي (الواجهة + الفستانين على الجوانب) */
+        .hero-facade {
+            position: relative;
+            z-index: 5;
+            min-height: calc(100vh - 80px);
+            display: grid;
+            grid-template-columns: 1fr 1.35fr 1fr;
+            align-items: center;
+            gap: 15px;
+            padding: 30px 3% 50px;
+            max-width: 1480px;
+            margin: 0 auto;
+        }
+
+        /* الفساتين الجانبية الفخمة */
+        .side-dress-Showcase {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            transition: transform 0.5s ease;
+        }
+
+        .side-dress-Showcase:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .dress-pedestal {
+            position: relative;
+            width: 100%;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 200px 200px 30px 30px;
+            padding: 20px 10px 15px;
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 0 35px rgba(212, 175, 55, 0.08);
+        }
+
+        .dress-pedestal::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 200px 200px 32px 32px;
+            background: linear-gradient(180deg, rgba(212,175,55,0.55), transparent 45%, rgba(255,117,143,0.4));
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .dress-svg {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.85));
+            animation: floatDress 5s ease-in-out infinite;
+        }
+
+        .side-left .dress-svg {
+            animation-delay: -2.5s;
+        }
+
+        @keyframes floatDress {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .dress-tag {
+            margin-top: 12px;
+            padding: 6px 20px;
+            border-radius: 50px;
+            background: linear-gradient(90deg, rgba(139,0,29,0.85), rgba(40,5,15,0.9));
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        /* لافتة وواجهة الأتيليه في المنتصف */
+        .center-atelier-board {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 25px 20px;
+            position: relative;
+        }
+
+        /* القوس الملكي المستوحى من يافطة المحل الحقيقية */
+        .atelier-signboard {
+            position: relative;
+            width: 100%;
+            max-width: 580px;
+            background: linear-gradient(180deg, #16141a 0%, #09080c 100%);
+            border: 6px solid #6e0d25;
+            outline: 2px solid var(--gold-primary);
+            border-radius: 190px 190px 28px 28px;
+            padding: 45px 30px 40px;
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(217, 4, 41, 0.25),
+                inset 0 0 30px rgba(212, 175, 55, 0.15);
+            margin-bottom: 28px;
+            overflow: hidden;
+        }
+
+        /* القوس الذهبي الداخلي */
+        .atelier-signboard::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 18px;
+            right: 18px;
+            bottom: 14px;
+            border: 2px solid rgba(212, 175, 55, 0.65);
+            border-radius: 175px 175px 18px 18px;
+            pointer-events: none;
+        }
+
+        /* لمعة ضوئية في منتصف اليافطة */
+        .sign-spotlight {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 90px;
+            background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, rgba(212,175,55,0.15) 50%, transparent 75%);
+            filter: blur(12px);
+            pointer-events: none;
+        }
+
+        .arabic-atelier-title {
+            font-family: 'Amiri', serif;
+            font-size: 2.3rem;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            text-shadow: 0 3px 12px rgba(212, 175, 55, 0.5);
+        }
+
+        .main-brand-name {
+            font-family: 'Playfair Display', 'Cinzel Decorative', serif;
+            font-size: clamp(2.6rem, 5vw, 4.3rem);
+            font-weight: 800;
+            background: linear-gradient(180deg, #fff8d6 0%, #f3cf65 38%, #c8961e 75%, #fde89e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 8px 28px rgba(0, 0, 0, 0.8);
+            letter-spacing: 3px;
+            line-height: 1.15;
+            margin-bottom: 14px;
+        }
+
+        .gold-divider {
+            width: 75%;
+            height: 2px;
+            margin: 12px auto 18px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), #fff, var(--gold-primary), transparent);
+            position: relative;
+        }
+
+        .gold-divider::after {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #0d0b10;
+            padding: 0 10px;
+            color: var(--gold-light);
+            font-size: 1.1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #fce4ec;
+            line-height: 1.8;
+            max-width: 460px;
+            margin: 0 auto 22px;
+            font-weight: 400;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #f9e29c 0%, #d4af37 50%, #9b7411 100%);
+            color: #1a0409;
+            font-weight: 800;
+            font-size: 1.08rem;
+            padding: 13px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.45);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 32px rgba(212, 175, 55, 0.75);
+        }
+
+        .btn-outline-rose {
+            background: rgba(139, 0, 29, 0.45);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 13px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            border: 1.5px solid var(--rose-pink);
+            box-shadow: 0 8px 20px rgba(255, 117, 143, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-rose:hover {
+            background: var(--ruby-red);
+            border-color: var(--gold-light);
+            transform: translateY(-3px);
+        }
+
+        /* شريط العنوان البارز */
+        .address-banner {
+            margin-top: 26px;
+            background: rgba(20, 5, 10, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-right: 5px solid var(--ruby-red);
+            border-left: 5px solid var(--ruby-red);
+            padding: 14px 26px;
+            border-radius: 16px;
+            color: #fff;
+            font-size: 1.05rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .address-banner strong {
+            color: var(--gold-light);
+        }
+
+        /* قسم المميزات والتشكيلة */
+        .collections-section {
+            position: relative;
+            z-index: 5;
+            padding: 60px 6%;
+            max-width: 1350px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-heading {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            color: var(--gold-light);
+            margin-bottom: 10px;
+        }
+
+        .section-desc {
+            color: #f3c6d3;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 25px;
+        }
+
+        .collection-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 22px;
+            padding: 30px 22px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.35s ease, border-color 0.35s ease;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold-light);
+            box-shadow: 0 15px 35px rgba(217, 4, 41, 0.25);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+            display: inline-block;
+        }
+
+        .collection-card h3 {
+            color: var(--gold-light);
+            font-size: 1.35rem;
+            margin-bottom: 10px;
+        }
+
+        .collection-card p {
+            color: #e9d5db;
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        /* الفوتر */
+        footer {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.25);
+            background: rgba(6, 1, 3, 0.92);
+            color: #d8b4c0;
+            font-size: 0.95rem;
+        }
+
+        footer .gold-text {
+            color: var(--gold-light);
+            font-weight: 700;
+        }
+
+        /* التجاوب مع الشاشات الصغيرة والموبايل */
+        @media (max-width: 1024px) {
+            .hero-facade {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+            .center-atelier-board {
+                order: -1;
+            }
+            .side-dress-Showcase {
+                flex-direction: row;
+                justify-content: center;
+            }
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- إضاءات خلفية فخمة -->
+    <div class="ambient-glow glow-right"></div>
+    <div class="ambient-glow glow-left"></div>
+    <div class="ambient-glow glow-center"></div>
+
+    <!-- كانفاس أوراق الورد الأحمر والبمبي المتطايرة -->
+    <canvas id="petals-canvas"></canvas>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="nav-brand">
+            <span class="arabic-sub">أتيليه</span>
+            <span class="english-name">Ronza Dress</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#collections">أحدث الفساتين</a></li>
+                <li><a href="#location">عنواننا</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- الواجهة الرئيسية: فستان يمين + يافطة الأتيليه في المنتصف + فستان شمال -->
+    <main id="home" class="hero-facade">
+
+        <!-- الفستان السواريه الأول (يمين الصفحة - الفستان الأحمر الملكي المتوهج) -->
+        <div class="side-dress-Showcase side-right">
+            <div class="dress-pedestal">
+                <!-- رسم فستان سواريه أحمر ملكي فخم بتفاصيل الكاب والحزام الألماس -->
+                <svg class="dress-svg" viewBox="0 0 300 520" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="rubyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ff1e42"/>
+                            <stop offset="35%" stop-color="#c90024"/>
+                            <stop offset="70%" stop-color="#800016"/>
+                            <stop offset="100%" stop-color="#42000b"/>
+                        </linearGradient>
+                        <linearGradient id="rubyCape" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ff4769" stop-opacity="0.9"/>
+                            <stop offset="100%" stop-color="#7a0014" stop-opacity="0.95"/>
+                        </linearGradient>
+                        <linearGradient id="goldNeck" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#b5891c"/>
+                            <stop offset="50%" stop-color="#fbe69b"/>
+                            <stop offset="100%" stop-color="#997415"/>
+                        </linearGradient>
+                        <filter id="redGlow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="8" result="blur"/>
+                            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                        </filter>
+                    </defs>
+
+                    <!-- هالة مضيئة خلف الفستان -->
+                    <ellipse cx="150" cy="260" rx="95" ry="200" fill="rgba(255, 30, 66, 0.15)" filter="url(#redGlow)"/>
+
+                    <!-- حامل المانيكان الذهبي -->
+                    <rect x="145" y="25" width="10" height="28" rx="4" fill="url(#goldNeck)"/>
+                    <path d="M132 45 Q150 55 168 45 L175 62 Q150 70 125 62 Z" fill="url(#goldNeck)"/>
+
+                    <!-- الكاب الملكي المنسدل على الأكتاف (مستوحى من فستان رونزا الأحمر) -->
+                    <path d="M88 68 Q60 150 68 255 Q88 235 104 150 Z" fill="url(#rubyCape)"/>
+                    <path d="M212 68 Q240 150 232 255 Q212 235 196 150 Z" fill="url(#rubyCape)"/>
+
+                    <!-- الصدر والخصر -->
+                    <path d="M92 65 Q150 55 208 65 L195 135 Q180 165 182 195 L118 195 Q120 165 105 135 Z" fill="url(#rubyGrad)"/>
+
+                    <!-- درابيه الصدر المتقاطع -->
+                    <path d="M92 68 Q150 115 208 68 Q185 118 150 105 Q115 118 92 68 Z" fill="#ff3357" opacity="0.65"/>
+
+                    <!-- تنورة الفستان السواريه المنسدلة بكسرات ملكية -->
+                    <path d="M118 195 L182 195 Q215 320 250 485 Q150 508 50 485 Q85 320 118 195 Z" fill="url(#rubyGrad)"/>
+
+                    <!-- خطوط كسرات وإضاءة القماش الستان والشيفون -->
+                    <path d="M132 198 Q112 340 85 485" stroke="#ff5c77" stroke-width="2.2" fill="none" opacity="0.55"/>
+                    <path d="M150 198 Q150 340 148 492" stroke="#ff758f" stroke-width="2.5" fill="none" opacity="0.6"/>
+                    <path d="M168 198 Q188 340 215 485" stroke="#ff5c77" stroke-width="2.2" fill="none" opacity="0.55"/>
+                    <path d="M125 200 Q98 345 65 480" stroke="#4a000d" stroke-width="3" fill="none" opacity="0.6"/>
+                    <path d="M175 200 Q202 345 235 480" stroke="#4a000d" stroke-width="3" fill="none" opacity="0.6"/>
+
+                    <!-- حزام الكريستال واللؤلؤ اللامع على الخصر -->
+                    <path d="M116 193 Q150 208 184 193" stroke="#ffffff" stroke-width="6" stroke-linecap="round" fill="none"/>
+                    <path d="M116 193 Q150 208 184 193" stroke="#fbe69b" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round" fill="none"/>
+
+                    <!-- نجوم ولمعات متلألئة على الفستان -->
+                    <circle cx="150" cy="200" r="3.5" fill="#fff"/>
+                    <circle cx="135" cy="197" r="2.5" fill="#fff"/>
+                    <circle cx="165" cy="197" r="2.5" fill="#fff"/>
+                    <circle cx="125" cy="280" r="2" fill="#ffb3c1"/>
+                    <circle cx="170" cy="340" r="2.5" fill="#fff"/>
+                    <circle cx="115" cy="410" r="2" fill="#fff"/>
+                    <circle cx="185" cy="430" r="3" fill="#ffb3c1"/>
+                </svg>
+                <div class="dress-tag">✨ سواريه أحمر ملكي فاخر ✨</div>
+            </div>
+        </div>
+
+        <!-- الواجهة الوسطى باسم الأتيليه Ronza Dress -->
+        <div class="center-atelier-board">
+            <div class="atelier-signboard">
+                <div class="sign-spotlight"></div>
+                <div class="arabic-atelier-title">أتيليه</div>
+                <h1 class="main-brand-name">Ronza dress</h1>
+                <div class="gold-divider"></div>
+                <p class="hero-subtitle">
+                    تألقي كالأميرات في ليلتكِ المميزة مع أرقى تصميمات فساتين السواريه والزفاف والخطوبة الخاطفة للأنظار
+                </p>
+                <div class="cta-buttons">
+                    <a href="#collections" class="btn-gold">استعرضي التشكيلة</a>
+                    <a href="#location" class="btn-outline-rose">زورينا الآن</a>
+                </div>
+            </div>
+
+            <div id="location" class="address-banner">
+                📍 <strong>مستنيينكو تشرفونا:</strong> العباسي الجديد - أمام قاعة سَحَرْ - بجوار أحذية اللؤلؤة
+            </div>
+        </div>
+
+        <!-- الفستان السواريه الثاني (يسار الصفحة - الفستان الأبيض والذهبي اللؤلؤي الساطع) -->
+        <div class="side-dress-Showcase side-left">
+            <div class="dress-pedestal">
+                <!-- رسم فستان سواريه/زفاف أبيض لؤلؤي مطرز بالذهبي والفضي -->
+                <svg class="dress-svg" viewBox="0 0 300 520" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="pearlWhite" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="45%" stop-color="#f7f0f5"/>
+                            <stop offset="80%" stop-color="#e5d4e0"/>
+                            <stop offset="100%" stop-color="#cbb2c4"/>
+                        </linearGradient>
+                        <linearGradient id="goldLace" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fff6d1"/>
+                            <stop offset="50%" stop-color="#d4af37"/>
+                            <stop offset="100%" stop-color="#8c6910"/>
+                        </linearGradient>
+                        <filter id="whiteGlow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="9" result="blur"/>
+                            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                        </filter>
+                    </defs>
+
+                    <!-- هالة مضيئة ساطعة خلف الفستان الأبيض -->
+                    <ellipse cx="150" cy="260" rx="95" ry="200" fill="rgba(255, 255, 255, 0.18)" filter="url(#whiteGlow)"/>
+
+                    <!-- حامل المانيكان الذهبي -->
+                    <rect x="145" y="25" width="10" height="28" rx="4" fill="url(#goldLace)"/>
+                    <path d="M132 45 Q150 55 168 45 L175 62 Q150 70 125 62 Z" fill="url(#goldLace)"/>
+
+                    <!-- أكمام شيفون ملكية منسدلة -->
+                    <path d="M92 68 Q68 155 76 245 Q95 235 108 145 Z" fill="#ffffff" opacity="0.85"/>
+                    <path d="M208 68 Q232 155 224 245 Q205 235 192 145 Z" fill="#ffffff" opacity="0.85"/>
+
+                    <!-- الصدر والخصر الكورسيه بكسرات الدرابيه -->
+                    <path d="M92 66 Q150 56 208 66 L194 140 Q180 175 180 205 L120 205 Q120 175 106 140 Z" fill="url(#pearlWhite)"/>
+
+                    <!-- كسرات الدرابيه العرضية على الخصر والبطن (مستوحاة من الفستان الأبيض في الصورة) -->
+                    <path d="M112 155 Q150 170 188 155" stroke="#d8c3d2" stroke-width="2.5" fill="none"/>
+                    <path d="M115 172 Q150 187 185 172" stroke="#d8c3d2" stroke-width="2.5" fill="none"/>
+                    <path d="M118 189 Q150 204 182 189" stroke="#d8c3d2" stroke-width="2.5" fill="none"/>
+                    <path d="M118 205 Q150 222 182 205" stroke="url(#goldLace)" stroke-width="4" fill="none"/>
+
+                    <!-- قصة الحورية (Mermaid Skirt) مع الكسرات الفخمة -->
+                    <path d="M120 205 L180 205 Q196 270 186 335 Q225 415 252 485 Q150 510 48 485 Q75 415 114 335 Q104 270 120 205 Z" fill="url(#pearlWhite)"/>
+
+                    <!-- تطريز ذهبي وفضي متلألئ على الصدر والتنورة -->
+                    <path d="M115 230 Q150 250 185 230" stroke="#e3d1dd" stroke-width="2" fill="none"/>
+                    <path d="M113 260 Q150 282 187 260" stroke="#e3d1dd" stroke-width="2" fill="none"/>
+                    <path d="M112 290 Q150 312 188 290" stroke="#e3d1dd" stroke-width="2" fill="none"/>
+                    <path d="M114 320 Q150 340 186 320" stroke="url(#goldLace)" stroke-width="2.2" fill="none"/>
+
+                    <!-- كسرات ذيل الفستان الأبيض الساطع -->
+                    <path d="M130 335 Q105 415 78 486" stroke="#ffffff" stroke-width="3" fill="none"/>
+                    <path d="M150 340 Q150 415 150 494" stroke="#ffffff" stroke-width="3.5" fill="none"/>
+                    <path d="M170 335 Q195 415 222 486" stroke="#ffffff" stroke-width="3" fill="none"/>
+
+                    <!-- حبيبات اللؤلؤ والألماس اللامعة -->
+                    <circle cx="150" cy="95" r="3" fill="#fbe69b"/>
+                    <circle cx="132" cy="110" r="2.5" fill="#fbe69b"/>
+                    <circle cx="168" cy="110" r="2.5" fill="#fbe69b"/>
+                    <circle cx="140" cy="130" r="2" fill="#fff"/>
+                    <circle cx="160" cy="130" r="2" fill="#fff"/>
+                    <circle cx="130" cy="390" r="3" fill="#fbe69b"/>
+                    <circle cx="172" cy="420" r="3" fill="#fbe69b"/>
+                    <circle cx="150" cy="450" r="3.5" fill="#fff"/>
+                </svg>
+                <div class="dress-tag">🤍 سواريه وزفاف أبيض لؤلؤي 🤍</div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- قسم التشكيلات المميزة -->
+    <section id="collections" class="collections-section">
+        <h2 class="section-heading">لماذا أتيليه Ronza Dress؟</h2>
+        <p class="section-desc">نجمع لكِ بين الفخامة، أحدث صيحات الموضة، وأجود الخامات التي تجعلكِ نجمة الحفل</p>
+
+        <div class="cards-grid">
+            <div class="collection-card">
+                <span class="card-icon">👑</span>
+                <h3>تصميمات ملكية حصرية</h3>
+                <p>فساتين سواريه وزفاف وخطوبة بتفاصيل يدوية وتطريزات فاخرة تناسب كافة الأذواق الراقية والمحجبات.</p>
+            </div>
+            <div class="collection-card">
+                <span class="card-icon">🌹</span>
+                <h3>أجود الماتريال والخامات</h3>
+                <p>نختار بعناية فائقة أرقى الأقمشة من الستان الحريري، الشيفون، والتل المطرز باللؤلؤ والكريستال الأصلي.</p>
+            </div>
+            <div class="collection-card">
+                <span class="card-icon">✨</span>
+                <h3>إطلالة تخطف الأنظار</h3>
+                <p>ألوان زاهية وساحرة من الأحمر الملكي، الأبيض اللؤلؤي، الذهبي، والروز الفاتح لتتألقي في كل مناسبة.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <p>جميع الحقوق محفوظة © <span class="gold-text">أتيليه Ronza Dress</span> — العباسي الجديد، أمام قاعة سحر، بجوار أحذية اللؤلؤة</p>
+    </footer>
+
+    <!-- سكريبت تحريك أوراق الورد الأحمر والبمبي المتطايرة في الخلفية -->
+    <script>
+        const canvas = document.getElementById('petals-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // ألوان ورق الورد الأحمر والبمبي الزاهية والناعمة
+        const petalColors = [
+            { fill: '#d90429', stroke: '#ff4d6d' }, // أحمر ياقوتي
+            { fill: '#ef233c', stroke: '#ff758f' }, // أحمر زاهي
+            { fill: '#9b001a', stroke: '#d90429' }, // أحمر مخملي داكن
+            { fill: '#ff4d6d', stroke: '#ffb3c1' }, // بمبي غامق
+            { fill: '#ff758f', stroke: '#ffccd5' }, // بمبي زاهي
+            { fill: '#ffb3c1', stroke: '#fff0f3' }  // بمبي ناعم فاتح
+        ];
+
+        class RosePetal {
+            constructor(initial = false) {
+                this.reset(initial);
+            }
+
+            reset(initial = false) {
+                this.x = Math.random() * width;
+                this.y = initial ? Math.random() * height : -40;
+                this.size = 10 + Math.random() * 16;
+                this.speedY = 0.8 + Math.random() * 1.6;
+                this.speedX = -0.8 + Math.random() * 1.6;
+                this.angle = Math.random() * Math.PI * 2;
+                this.spinSpeed = (-0.02 + Math.random() * 0.04);
+                this.flip = Math.random() * Math.PI;
+                this.flipSpeed = 0.015 + Math.random() * 0.03;
+                this.swayAmplitude = 0.5 + Math.random() * 1.2;
+                this.swayOffset = Math.random() * 100;
+                this.color = petalColors[Math.floor(Math.random() * petalColors.length)];
+                this.opacity = 0.65 + Math.random() * 0.35;
+            }
+
+            update(frame) {
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin((frame + this.swayOffset) * 0.02) * this.swayAmplitude;
+                this.angle += this.spinSpeed;
+                this.flip += this.flipSpeed;
+
+                if (this.y > height + 50 || this.x < -60 || this.x > width + 60) {
+                    this.reset(false);
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                // محاكاة الدوران ثلاثي الأبعاد لورقة الورد في الهواء
+                ctx.scale(1, 0.35 + Math.abs(Math.cos(this.flip)) * 0.65);
+
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                // رسم شكل ورقة الورد الطبيعية
+                const s = this.size;
+                ctx.moveTo(0, s);
+                ctx.bezierCurveTo(-s * 1.1, s * 0.4, -s * 0.9, -s * 0.9, 0, -s * 0.65);
+                ctx.bezierCurveTo(s * 0.9, -s * 0.9, s * 1.1, s * 0.4, 0, s);
+                ctx.closePath();
+
+                // تدرج لوني لورقة الورد
+                const grad = ctx.createRadialGradient(0, 0, s * 0.1, 0, 0, s);
+                grad.addColorStop(0, this.color.stroke);
+                grad.addColorStop(1, this.color.fill);
+
+                ctx.fillStyle = grad;
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        const totalPetals = 55;
+        const petals = [];
+        for (let i = 0; i < totalPetals; i++) {
+            petals.push(new RosePetal(true));
+        }
+
+        let frame = 0;
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            frame++;
+            for (const petal of petals) {
+                petal.update(frame);
+                petal.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
 </html>
